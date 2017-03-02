@@ -1,0 +1,21 @@
+{
+  "name": "errisy-session",
+  "version": "1.0.3",
+  "description": "use cookie to save session data for light weight service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cookie",
+    "session",
+    "errisy-server"
+  ],
+  "dependencies": {
+    "errisy-server": "1.0.5",
+    "cookie": "0.3.1"
+  },
+  "author": "Zhenyu Shi",
+  "license": "ISC",
+  "readme": "readme.md"
+}
