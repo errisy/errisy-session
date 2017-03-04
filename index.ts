@@ -108,11 +108,14 @@ export class CookieSession implements ISession {
         let value = request.headers['cookie'];
         if (value && typeof value == 'string') {
             let SessionString = cookie.parse(value)['session'];
+            //console.log('SessionString:', SessionString);
             try {
-                this.DataObject = JSON.parse(SessionString);
+                this.DataObject = JSON.parse(this.middleware.decrypt(SessionString));
+                //console.log('Sesssion DataObject:', this.DataObject);
             }
             catch (ex) {
                 this.DataObject = {};
+                //console.log('Sesssion DataObject Failed:', ex);
             }
         }
     }
@@ -126,6 +129,7 @@ export class CookieSession implements ISession {
                 if (this.DataObject[key].reflash) Obj[key].flash = true;
             }
         }
+        //console.log('Save Session:', this.middleware.encrypt(JSON.stringify(Obj)));
         this.response.setHeader('Set-Cookie',
             cookie.serialize(
                 'session',

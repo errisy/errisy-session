@@ -155,11 +155,14 @@ var CookieSession = (function () {
         var value = request.headers['cookie'];
         if (value && typeof value == 'string') {
             var SessionString = cookie.parse(value)['session'];
+            //console.log('SessionString:', SessionString);
             try {
-                this.DataObject = JSON.parse(SessionString);
+                this.DataObject = JSON.parse(this.middleware.decrypt(SessionString));
+                //console.log('Sesssion DataObject:', this.DataObject);
             }
             catch (ex) {
                 this.DataObject = {};
+                //console.log('Sesssion DataObject Failed:', ex);
             }
         }
     }
@@ -174,6 +177,7 @@ var CookieSession = (function () {
                     Obj[key].flash = true;
             }
         }
+        //console.log('Save Session:', this.middleware.encrypt(JSON.stringify(Obj)));
         this.response.setHeader('Set-Cookie', cookie.serialize('session', this.middleware.encrypt(JSON.stringify(Obj)), { maxAge: this.middleware.expiryPeroid, httpOnly: true }));
     };
     CookieSession.prototype.put = function (key, value, expiryTime) {

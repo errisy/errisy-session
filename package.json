@@ -1,6 +1,6 @@
 {
   "name": "errisy-session",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "use cookie to save session data for light weight service",
   "main": "index.js",
   "scripts": {
